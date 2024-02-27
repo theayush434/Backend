@@ -6,11 +6,23 @@ import dotenv from "dotenv"
 
 import connectDB from "./db/database.js"
 
+
 dotenv.config({
      path:'./env'
 })
 
+/* DB me hamne async method lekha hai to ye jub bhi complete hota hai to 
+promise return karta hai to jub data base complete hojatye to yaha .then() .cathch()
+use kur lege */
 connectDB()
+.then(()=>{
+     app.listen(process.env.PORT || 8000,()=>{
+          console.log(`Server is running at port : ${process.env.PORT}`)
+     })
+})
+.catch((err)=>{
+     console.error("mongo db connection failed",err);
+})
 
 
 
